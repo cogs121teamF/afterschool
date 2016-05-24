@@ -3,7 +3,7 @@
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0"/>
-  <title>Starter Template - Materialize</title>
+  <title>afterschool</title>
 
   <!-- CSS  -->
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
@@ -12,6 +12,27 @@
 
   <!-- Compiled and minified CSS -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/css/materialize.min.css">
+
+  <link rel="stylesheet" href="https://js.arcgis.com/3.16/esri/css/esri.css">
+  <style>
+    html, body, #map {
+      height: 100%;
+      margin: 0;
+      padding: 0;
+    }
+  </style>
+  <script src="https://js.arcgis.com/3.16/"></script>
+  <script>
+    var map;
+
+    require(["esri/map", "dojo/domReady!"], function(Map) {
+      map = new Map("map", {
+        basemap: "streets",  //For full list of pre-defined basemaps, navigate to http://arcg.is/1JVo6Wd
+        center: [-117.19, 32.77], // longitude, latitude
+        zoom: 11
+      });
+    });
+  </script>
 </head>
 <body>
   <!-- <div class="section no-pad-bot" id="index-banner">
@@ -70,6 +91,7 @@
       <div class="section">
         <h1>Map</h1>
       </div>
+      <div id="map"></div>
     </div>
 
     <br><br>
