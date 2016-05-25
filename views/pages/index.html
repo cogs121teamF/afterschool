@@ -30,7 +30,11 @@
       map = new Map("map", {
         basemap: "streets",  //For full list of pre-defined basemaps, navigate to http://arcg.is/1JVo6Wd
         center: [-117.19, 32.77], // longitude, latitude
-        zoom: 11
+        zoom: 11,
+        smartNavigation: false
+      });
+      map.on("load", function() {
+        map.disableScrollWheelZoom();
       });
     });
   </script>
