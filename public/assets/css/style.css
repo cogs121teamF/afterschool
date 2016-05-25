@@ -13,10 +13,15 @@
 	font-size: inherit;
 }
 
+html{font-family: "Avenir", sans-serif;}
+
 body{ margin:0px 0px; }
 
 #hero{
-  background-image:url(http://d2v8ggac1o0f6z.cloudfront.net/gsc/GF9FS6/90/ef/26/90ef267051db46b194b28ed581b858c4/images/afterschool/u0.jpg?token=1fd65cb4a1c993e4b28da66963213bc9);
+  background-image:url(../img/splash-page.png);
+  background-repeat:none;
+  background-attachment:scroll;
+  background-position:center center;
   background-size:cover;
   position:relative;
   height:100vh;
@@ -28,7 +33,7 @@ body{ margin:0px 0px; }
   text-align:center;
   width:100%;
   color:#fff;
-  font-size:36px;
+  font-size:20px;
   -ms-transform: translate(0,-50%); /* IE 9 */
    	-webkit-transform: translate(0,-50%); /* Safari */
     transform: translate(0,-50%);
