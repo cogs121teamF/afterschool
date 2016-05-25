@@ -27,8 +27,29 @@ body{ margin:0px 0px; }
   height:100vh;
 }
 
-#statisticsSection img{
-  padding-left: 10px;
+#statisticsSection p{
+  text-align: center;
+}
+
+#statisticsSection ul{
+  padding-left: 20%;
+  font-size: small;
+}
+
+#statisticsSection ul.icon{
+  list-style-type: none;
+}
+
+#statisticsSection ul.icon li{
+  text-indent: -1.4em;
+}
+
+#statisticsSection ul.icon li:before {
+  font-family: "Material Icons";
+  content: "done";
+  float: left;
+  width: 1.4em;
+  color: #EEB154;
 }
 
 .header{
