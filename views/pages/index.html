@@ -26,15 +26,32 @@
   <script>
     var map;
 
-    require(["esri/map", "dojo/domReady!"], function(Map) {
+    require(["esri/map", "esri/geometry/Circle", "esri/symbols/SimpleFillSymbol", 
+        "esri/graphic", "esri/layers/GraphicsLayer",
+        "dojo/dom", "dojo/dom-attr", "dojo/domReady!"], 
+        function(Map, Circle, SimpleFillSymbol, 
+        Graphic, GraphicsLayer, 
+        dom, domAttr) {
       map = new Map("map", {
         basemap: "streets",  //For full list of pre-defined basemaps, navigate to http://arcg.is/1JVo6Wd
         center: [-117.19, 32.77], // longitude, latitude
         zoom: 11,
         smartNavigation: false
       });
-      map.on("load", function() {
+        var symbol = new SimpleFillSymbol().setColor(null).outline.setColor("blue");
+        var gl = new GraphicsLayer({ id: "circles" });
+        var geodesic = dom.byId("geodesic");
+        map.addLayer(gl);
+      map.on(/*"load"*/"click", function(e) {
         map.disableScrollWheelZoom();
+        var radius = map.extent.getWidth() / 10;
+        var circle = new Circle({
+            center: e.mapPoint,
+            geodesic: domAttr.get(geodesic, "checked"),
+            radius: radius
+        });
+        var graphic = new Graphic(circle, symbol);
+        gl.add(graphic);
       });
     });
   </script>
@@ -96,6 +113,13 @@
         <h1>Map</h1>
       </div>
       <div id="map"></div>
+      
+      <div id="controls">
+      <div>Click the map.</div>
+      <input type="checkbox" id="geodesic">
+      <label for="geodesic">Geodesic?</label>
+
+    </div>
     </div>
 
     <br><br>
