@@ -15,6 +15,7 @@ hbs.registerHelper('dateFormat', function(context, block) {
 
 app.set('view engine', 'html');
 app.set('views', __dirname + '/views/pages');
+app.set('port', process.env.PORT || 3000);
 app.engine('html', hbs.__express);
 
 app.use(compress({
