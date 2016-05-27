@@ -6,6 +6,15 @@ var express  = require('express'),
     app      = express(),
     error    = require(__dirname + '/middleware/error');
 
+var dotenv = require('dotenv');
+var pg = require('pg');
+
+//client id and client secret here, taken from .env (which you need to create)
+dotenv.load();
+
+//connect to database
+var conString = process.env.DATABASE_CONNECTION_URL;
+
 hbs.registerPartials(__dirname + '/views/partials');
 
 hbs.registerHelper('dateFormat', function(context, block) {
@@ -44,6 +53,9 @@ route.get('/services.html', router.services);
 route.get('/downloads.html', router.downloads);
 route.get('/about.html', router.about);
 route.get('/contact.html', router.contact);
+route.get('/schoolData', router.schoolData);
+route.get('/parkData', router.parkData);
+route.get('/recData', router.recData);
 
 app.use('/', route);
 
