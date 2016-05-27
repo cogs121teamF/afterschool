@@ -14,47 +14,13 @@
   <!--link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/css/materialize.min.css"-->
   <link rel="stylesheet" href="assets/css/materialize.min.css">
 
-  <link rel="stylesheet" href="https://js.arcgis.com/3.16/esri/css/esri.css">
+  <!-- Leaflet dependencies -->
+  <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.css">
+  <script src="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.js"></script>
   <style>
-    html, body, #map {
-      height: 1000px;
-      margin: 0;
-      padding: 0;
-    }
+    #map { height: 500px; }
   </style>
-  <script src="https://js.arcgis.com/3.16/"></script>
-  <script>
-    var map;
 
-    require(["esri/map", "esri/geometry/Circle", "esri/symbols/SimpleFillSymbol", 
-        "esri/graphic", "esri/layers/GraphicsLayer",
-        "dojo/dom", "dojo/dom-attr", "dojo/domReady!"], 
-        function(Map, Circle, SimpleFillSymbol, 
-        Graphic, GraphicsLayer, 
-        dom, domAttr) {
-      map = new Map("map", {
-        basemap: "streets",  //For full list of pre-defined basemaps, navigate to http://arcg.is/1JVo6Wd
-        center: [-117.19, 32.77], // longitude, latitude
-        zoom: 11,
-        smartNavigation: false
-      });
-      var symbol = new SimpleFillSymbol().setColor(null).outline.setColor("blue");
-      var gl = new GraphicsLayer({ id: "circles" });
-      var geodesic = dom.byId("geodesic");
-      map.addLayer(gl);
-      map.on(/*"load"*/"click", function(e) {
-        map.disableScrollWheelZoom();
-        var radius = map.extent.getWidth() / 10;
-        var circle = new Circle({
-            center: e.mapPoint,
-            geodesic: domAttr.get(geodesic, "checked"),
-            radius: radius
-        });
-        var graphic = new Graphic(circle, symbol);
-        gl.add(graphic);
-      });
-    });
-  </script>
 </head>
 <body>
   <!-- <div class="section no-pad-bot" id="index-banner">
@@ -113,13 +79,6 @@
         <h1>Map</h1>
       </div>
       <div id="map"></div>
-      
-      <div id="controls">
-      <div>Click the map.</div>
-      <input type="checkbox" id="geodesic">
-      <label for="geodesic">Geodesic?</label>
-
-    </div>
     </div>
 
     <br><br>
@@ -183,6 +142,19 @@
 
 
   <!--  Scripts-->
+
+  <script>
+    var mymap = L.map('map').setView([32.77, -117.19], 11);
+    L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
+      /*attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>',*/
+      maxZoom: 18,
+      id: 'pjamas180.084e08al',
+      accessToken: 'pk.eyJ1IjoicGphbWFzMTgwIiwiYSI6ImNpb3AzN2szMzAwMmp1cGtxZzVxZHlnYW8ifQ.Ml7vL74HZOhLKcF2qNQ58g'
+    }).addTo(mymap);
+    mymap.scrollWheelZoom.disable();
+    
+  </script>
+
   <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
   <!-- <script src="/public/assets/js/materialize.js"></script> -->
   <script src="assets/js/init.js"></script>

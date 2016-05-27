@@ -3,7 +3,7 @@ var fs = require('fs'),
 
 exports.router = {
     index: function(req, res) {
-        res.render('index', { seo : seo });
+        res.render('leaflet', { seo : seo });
     },
     projects: function(req, res) {
         res.render('projects', { seo : seo });
