@@ -26,11 +26,11 @@
   <script>
     var map;
 
-    require(["esri/map", "esri/geometry/Circle", "esri/symbols/SimpleFillSymbol", 
+    require(["esri/map", "esri/geometry/Circle", "esri/symbols/SimpleFillSymbol",
         "esri/graphic", "esri/layers/GraphicsLayer",
-        "dojo/dom", "dojo/dom-attr", "dojo/domReady!"], 
-        function(Map, Circle, SimpleFillSymbol, 
-        Graphic, GraphicsLayer, 
+        "dojo/dom", "dojo/dom-attr", "dojo/domReady!"],
+        function(Map, Circle, SimpleFillSymbol,
+        Graphic, GraphicsLayer,
         dom, domAttr) {
       map = new Map("map", {
         basemap: "streets",  //For full list of pre-defined basemaps, navigate to http://arcg.is/1JVo6Wd
@@ -87,8 +87,9 @@
             <li>
               <input placeholder="Enter School Name" id="schoolName" type="text" class="validate">
             </li>
-             <li><a class="waves-effect waves-light btn">Map</a></li>
-            <li><a href="#statistics">Statisics</a></li>
+            <li><a class="waves-effect waves-light btn" href="#mapsSection">Map</a></li>
+             <li><a class="waves-effect waves-light btn" href="#mapsSection">Map</a></li>
+            <li><a class="waves-effect waves-light btn" href="#statisticsSection">Statisics</a></li>
           </ul>
         </div>
       </nav>
@@ -100,7 +101,7 @@
     <div class="header">
       <img class="responsive-img" src="assets/img/logo.png" alt="logo" style="display: inline-block;height: 200px;line-height: 200px;">
       <p class="flow-text" style="padding-left:50px;padding-right:50px;">Afterschool helps parents find fun, educational and safe activities for their children to engage in. With afterschool, parents can help their children use their most crucial developmental years to get involved with their community, learn new skills and grow into mature adults.</p>
-      <a href="#statistics"><img src="assets/img/down.png" style="height:250px;padding-top:190px;"></a>
+      <a href="#mapSection"><img src="assets/img/down.png" style="height:250px;padding-top:190px;"></a>
     </div>
   </div>
 </div>
@@ -113,7 +114,7 @@
         <h1>Map</h1>
       </div>
       <div id="map"></div>
-      
+
       <div id="controls">
       <div>Click the map.</div>
       <input type="checkbox" id="geodesic">
