@@ -80,16 +80,6 @@ function makeQuery(req, res, queryString, file) {
         // SQL Query > Insert Data
         // client.query("INSERT INTO items(text, complete) values($1, $2)", [data.text, data.complete]);
 
-        /* Get all SCHOOLS in San Diego area specified by certain latitudes and longitudes */
-        /*   
-        var query = client.query("SELECT * " +
-            " FROM cogs121_16_raw.sandag_places_project" +
-            " WHERE \"TYPE\" = 'School'" + 
-            " AND \"LATITUDE\" <  32.95  AND \"LATITUDE\" >  32.62" +
-            " AND \"LONGITUDE\" > -117.258 AND \"LONGITUDE\" < -116.977" + 
-            " AND \"NAME\" LIKE '%Elementary%'" + 
-            " ORDER BY \"NAME\" ASC;");
-        */
         var query = client.query(queryString);
         // Stream results back one row at a time
         query.on('row', function(row) {
