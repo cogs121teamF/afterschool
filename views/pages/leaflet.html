@@ -176,7 +176,7 @@
           */
           for (var i= 0; i < data.length; i++) {
             var marker = L.marker(new L.LatLng(data[i].LATITUDE, data[i].LONGITUDE), {
-              icon: L.mapbox.marker.icon({'marker-symbol': 'post', 'marker-color': 'EE6E73'}),
+              icon: L.mapbox.marker.icon({'marker-symbol': 'school', 'marker-color': 'EE6E73'}),
               title: data[i].NAME
             });
             marker.bindPopup(data[i].NAME);
