@@ -17,6 +17,7 @@ html{font-family: "Avenir", sans-serif;}
 
 body{ margin:0px 0px; }
 
+
 #hero{
   background-image:url(../img/splash-page.png);
   background-repeat:none;
@@ -75,6 +76,11 @@ body{ margin:0px 0px; }
 #content h2{
   margin:0px 0px 30px 0px;
 }
+
+#nav {
+  background-color: #4db6ac; 
+}    
+
 
 #footer{
   padding:30px 0px;
