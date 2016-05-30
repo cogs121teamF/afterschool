@@ -157,6 +157,28 @@
     }).addTo(mymap);
     mymap.scrollWheelZoom.disable();
 
+    $.getJSON("./recData", function(recCenters) {
+          console.log(recCenters);
+      for(var i = 0; i < recCenters.length; i++) {
+        var placeMarker = L.marker([recCenters[i].LATITUDE, recCenters[i].LONGITUDE]).addTo(mymap);
+        placeMarker.bindPopup(recCenters[i].NAME);
+      }   
+    });
+
+    $.getJSON("./libData", function(libraries) {
+      for(var i = 0; i < libraries.length; i++) {
+        var placeMarker = L.marker([libraries[i].LATITUDE, libraries[i].LONGITUDE]).addTo(mymap);
+        placeMarker.bindPopup(libraries[i].NAME);
+      }   
+    });
+
+    $.getJSON("./parkData", function(parks) {
+      for(var i = 0; i < parks.length; i++) {
+        var placeMarker = L.marker([parks[i].LATITUDE, parks[i].LONGITUDE]).addTo(mymap);
+        placeMarker.bindPopup(parks[i].NAME);
+      }   
+    });
+
     var data = {};
 
     // For each school, create a new marker

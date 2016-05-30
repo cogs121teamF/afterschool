@@ -58,6 +58,15 @@ exports.router = {
             " AND \"NAME\" LIKE '%Recreation%'" + 
             " ORDER BY \"NAME\" ASC;";
         makeQuery(req, res, recQuery, './recData.json');
+    },
+    libData: function(req, res) {
+        var libQuery = "SELECT * " +
+            " FROM cogs121_16_raw.sandag_places_project" +
+            " WHERE \"TYPE\" = 'Library'" + 
+            " AND \"LATITUDE\" <  32.95  AND \"LATITUDE\" >  32.62" +
+            " AND \"LONGITUDE\" > -117.258 AND \"LONGITUDE\" < -116.977" + 
+            " ORDER BY \"NAME\" ASC;";
+        makeQuery(req, res, libQuery, './libData.json');
     }
 
 };

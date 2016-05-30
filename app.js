@@ -56,6 +56,7 @@ route.get('/contact.html', router.contact);
 route.get('/schoolData', router.schoolData);
 route.get('/parkData', router.parkData);
 route.get('/recData', router.recData);
+route.get('/libData', router.libData);
 
 app.use('/', route);
 
