@@ -17,13 +17,6 @@
   <!-- Leaflet dependencies -->
   <link rel="stylesheet" href="assets/css/leaflet.css">
   <script src="assets/js/leaflet.js"></script>
-
-  <script src="https://api.mapbox.com/mapbox.js/v2.4.0/mapbox.js"></script>
-  <link href="https://api.mapbox.com/mapbox.js/v2.4.0/mapbox.css" rel="stylesheet">
-  <script src="https://api.mapbox.com/mapbox.js/plugins/leaflet-markercluster/v0.4.0/leaflet.markercluster.js"></script>
-  <link href="https://api.mapbox.com/mapbox.js/plugins/leaflet-markercluster/v0.4.0/MarkerCluster.css" rel="stylesheet">
-  <link href="https://api.mapbox.com/mapbox.js/plugins/leaflet-markercluster/v0.4.0/MarkerCluster.Default.css" rel="stylesheet">
-
   <style>
     #map { height: 500px; }
   </style>
@@ -72,7 +65,7 @@
   <div id="hero">
     <div class="header">
       <img class="responsive-img" src="assets/img/logo.png" alt="logo" style="display: inline-block;height: 200px;line-height: 200px;">
-      <p style="padding-left:50px;padding-right:50px;">Afterschool helps parents find fun, educational and safe activities for their children to engage in. With afterschool, parents can help their children use their most crucial developmental years to get involved with their community, learn new skills and grow into mature adults.</p>
+      <p class="flow-text" style="padding-left:50px;padding-right:50px;">Afterschool helps parents find fun, educational and safe activities for their children to engage in. With afterschool, parents can help their children use their most crucial developmental years to get involved with their community, learn new skills and grow into mature adults.</p>
       <a href="#mapSection"><img src="assets/img/down.png" style="height:250px;padding-top:190px;"></a>
     </div>
   </div>
@@ -86,6 +79,7 @@
         <h1>Map</h1>
       </div>
       <div id="map"></div>
+      <div id="chloropleth"></div>
     </div>
 
     <br><br>
@@ -129,11 +123,15 @@
     </div>
   </div>
 
-  <footer class="page-footer teal lighten-1">
+  <footer class="page-footer orange">
     <div class="container">
       <div class="row">
+        <div class="col l6 s12">
           <h5 class="white-text">About Us</h5>
           <p class="grey-text text-lighten-4">Afterschool helps parents find fun, educational and safe activities for their children to engage in. With afterschool, parents can help their children use their most crucial developmental years to get involved with their community, learn new skills and grow into mature adults.</p>
+
+
+        </div>
       </div>
     </div>
     <div class="footer-copyright">
@@ -145,10 +143,9 @@
 
 
   <!--  Scripts-->
-  <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
-  <script>
+
+  <!-- <script>
     var mymap = L.map('map').setView([32.77, -117.19], 11);
-    L.mapbox.accessToken = 'pk.eyJ1IjoicGphbWFzMTgwIiwiYSI6ImNpb3AzN2szMzAwMmp1cGtxZzVxZHlnYW8ifQ.Ml7vL74HZOhLKcF2qNQ58g';
     L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
       /*attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>',*/
       maxZoom: 18,
@@ -157,43 +154,17 @@
     }).addTo(mymap);
     mymap.scrollWheelZoom.disable();
 
-    var data = {};
+  </script> -->
 
-    // For each school, create a new marker
-    $.ajax({
-      type: 'GET',
-      dataType: 'json',
-      data: JSON.stringify(data),
-      contentType: 'application/json',
-      url: 'https://after-school.herokuapp.com/schoolData',
-      //url: 'http://localhost:3000/schoolData',
-      success: function(data) {
-          var markers = new L.MarkerClusterGroup();
-          var markerList = [];
-          /*
-          for each ( var x in data ) {
-            console.log(x);
-          }
-          */
-          for (var i= 0; i < data.length; i++) {
-            var marker = L.marker(new L.LatLng(data[i].LATITUDE, data[i].LONGITUDE), {
-              icon: L.mapbox.marker.icon({'marker-symbol': 'school', 'marker-color': 'EE6E73'}),
-              title: data[i].NAME
-            });
-            marker.bindPopup(data[i].NAME);
-            markers.addLayer(marker);
-            markerList.push(marker);
-            // console.log(data[i]);
-          }
-          mymap.addLayer(markers);
 
-      }
-    });
-    // var schoolName = 
+  <!--Gabe Test Map-->
+  <script src="assets/js/leafletPip.min.js"></script>
+  <script src="assets/js/chloropleth.js"></script>
 
-  </script>
+  <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
   <!-- <script src="/public/assets/js/materialize.js"></script> -->
   <script src="assets/js/init.js"></script>
+  <!-- <script src="assets/js/chloropleth.js"></script> -->
 
   <!-- Compiled and minified JavaScript -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/js/materialize.min.js"></script>
