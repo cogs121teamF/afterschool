@@ -78,6 +78,9 @@
       <div class="section">
         <h3>School Name</h3>
       </div>
+      <p><input type="checkbox" id="libBox" value="second_checkbox"><label for="libBox">Libraries</label></p>
+      <p><input type="checkbox" id="parkBox" value="second_checkbox"><label for="parkBox">Parks</label></p>
+      <p><input type="checkbox" id="recBox" value="second_checkbox"><label for="recBox">Recreational Centers</label></p>
       <div id="map"></div>
     </div>
 
@@ -150,27 +153,72 @@
     }).addTo(mymap);
     mymap.scrollWheelZoom.disable();
 
-    $.getJSON("./recData", function(recCenters) {
-          console.log(recCenters);
-      for(var i = 0; i < recCenters.length; i++) {
-        var placeMarker = L.marker([recCenters[i].LATITUDE, recCenters[i].LONGITUDE]).addTo(mymap);
-        placeMarker.bindPopup(recCenters[i].NAME);
-      }   
-    });
+    var libArray = new Array();
+    var parkArray = new Array();
+    var recArray = new Array();
 
-    $.getJSON("./libData", function(libraries) {
-      for(var i = 0; i < libraries.length; i++) {
-        var placeMarker = L.marker([libraries[i].LATITUDE, libraries[i].LONGITUDE]).addTo(mymap);
-        placeMarker.bindPopup(libraries[i].NAME);
-      }   
-    });
+    var libClicked = false;
+    var parkClicked = false;
+    var recClicked = false;
 
-    $.getJSON("./parkData", function(parks) {
-      for(var i = 0; i < parks.length; i++) {
-        var placeMarker = L.marker([parks[i].LATITUDE, parks[i].LONGITUDE]).addTo(mymap);
-        placeMarker.bindPopup(parks[i].NAME);
-      }   
-    });
+    document.getElementById("libBox").onclick = function() {
+      if(libClicked) {
+        for(var i = 0; i < libArray.length; i++) {
+          mymap.removeLayer(libArray[i]);
+        }
+        libClicked = false;
+      }
+      else {
+        $.getJSON("./libData", function(libraries) {
+          for(var i = 0; i < libraries.length; i++) {
+            var placeMarker = L.marker([libraries[i].LATITUDE, libraries[i].LONGITUDE]);
+            placeMarker.bindPopup(libraries[i].NAME);
+            libArray.push(placeMarker);
+            mymap.addLayer(libArray[i]);
+          }   
+        });
+        libClicked = true;
+      }
+    };
+    document.getElementById("parkBox").onclick = function() {
+      if(parkClicked) {
+        for(var i = 0; i < parkArray.length; i++) {
+          mymap.removeLayer(parkArray[i]);
+        }
+        parkClicked = false;
+      }
+      else {
+        $.getJSON("./parkData", function(parks) {
+          for(var i = 0; i < parks.length; i++) {
+            var placeMarker = L.marker([parks[i].LATITUDE, parks[i].LONGITUDE]);
+            placeMarker.bindPopup(parks[i].NAME);
+            parkArray.push(placeMarker);
+            mymap.addLayer(parkArray[i]);
+          }   
+        });
+        parkClicked = true;
+      }
+    };
+    document.getElementById("recBox").onclick = function() {
+      if(recClicked) {
+        for(var i = 0; i < recArray.length; i++) {
+          mymap.removeLayer(recArray[i]);
+        }
+        recClicked = false;
+      }
+      else {
+        $.getJSON("./recData", function(recCenters) {
+          //console.log(recCenters);
+          for(var i = 0; i < recCenters.length; i++) {
+            var placeMarker = L.marker([recCenters[i].LATITUDE, recCenters[i].LONGITUDE]);
+            placeMarker.bindPopup(recCenters[i].NAME);
+            recArray.push(placeMarker);
+            mymap.addLayer(recArray[i]);
+          }   
+        });
+        recClicked = true;
+      }
+    };
 
     var data = {};
 
