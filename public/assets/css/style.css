@@ -83,6 +83,11 @@ body{ margin:0px 0px; }
 
 }
 
+#statisticsSection {
+  background-color: #b2dfdb; 
+  color: #424242 ;
+}
+
 #statisticsSection p{
   text-align: center;
 }
@@ -107,6 +112,7 @@ body{ margin:0px 0px; }
   width: 1.4em;
   color: #EEB154;
 }
+
 footer ul.icon li:before {
   font-family: "Material Icons";
   content: "done";
