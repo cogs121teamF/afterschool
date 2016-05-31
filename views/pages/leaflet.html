@@ -228,8 +228,9 @@
       dataType: 'json',
       data: JSON.stringify(data),
       contentType: 'application/json',
-      url: 'https://after-school.herokuapp.com/schoolData',
+      //url: 'https://after-school.herokuapp.com/schoolData',
       //url: 'http://localhost:3000/schoolData',
+      url: './schoolData',
       success: function(data) {
           var markers = new L.MarkerClusterGroup();
           var markerList = [];
