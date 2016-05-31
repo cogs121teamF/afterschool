@@ -208,7 +208,9 @@
       else {
         $.getJSON("./libData", function(libraries) {
           for(var i = 0; i < libraries.length; i++) {
-            var placeMarker = L.marker([libraries[i].LATITUDE, libraries[i].LONGITUDE]);
+            var placeMarker = L.marker(new L.LatLng(libraries[i].LATITUDE, libraries[i].LONGITUDE), {
+              icon: L.mapbox.marker.icon({'marker-symbol': 'library', 'marker-color': 'F1C40F'})
+            });
             placeMarker.bindPopup(libraries[i].NAME);
             libArray.push(placeMarker);
             mymap.addLayer(libArray[i]);
@@ -227,7 +229,9 @@
       else {
         $.getJSON("./parkData", function(parks) {
           for(var i = 0; i < parks.length; i++) {
-            var placeMarker = L.marker([parks[i].LATITUDE, parks[i].LONGITUDE]);
+            var placeMarker = L.marker(new L.LatLng(parks[i].LATITUDE, parks[i].LONGITUDE), {
+              icon: L.mapbox.marker.icon({'marker-symbol': 'park', 'marker-color': '2ECC71'})
+            });
             placeMarker.bindPopup(parks[i].NAME);
             parkArray.push(placeMarker);
             mymap.addLayer(parkArray[i]);
@@ -247,11 +251,13 @@
         $.getJSON("./recData", function(recCenters) {
           //console.log(recCenters);
           for(var i = 0; i < recCenters.length; i++) {
-            var placeMarker = L.marker([recCenters[i].LATITUDE, recCenters[i].LONGITUDE]);
+            var placeMarker = L.marker(new L.LatLng(recCenters[i].LATITUDE, recCenters[i].LONGITUDE), {
+              icon: L.mapbox.marker.icon({'marker-symbol': 'basketball', 'marker-color': 'E74C3C'})
+            });
             placeMarker.bindPopup(recCenters[i].NAME);
             recArray.push(placeMarker);
             mymap.addLayer(recArray[i]);
-          }   
+          }
         });
         recClicked = true;
       }
@@ -265,16 +271,10 @@
       dataType: 'json',
       data: JSON.stringify(data),
       contentType: 'application/json',
-      url: 'https://after-school.herokuapp.com/schoolData',
-      //url: 'http://localhost:3000/schoolData',
+      url: './schoolData',
       success: function(data) {
           var markers = new L.MarkerClusterGroup();
           var markerList = [];
-          /*
-          for each ( var x in data ) {
-            console.log(x);
-          }
-          */
           for (var i= 0; i < data.length; i++) {
             var marker = L.marker(new L.LatLng(data[i].LATITUDE, data[i].LONGITUDE), {
               icon: L.mapbox.marker.icon({'marker-symbol': 'school', 'marker-color': 'EE6E73'}),
@@ -283,13 +283,11 @@
             marker.bindPopup(data[i].NAME);
             markers.addLayer(marker);
             markerList.push(marker);
-            // console.log(data[i]);
           }
           mymap.addLayer(markers);
 
       }
     });
-    // var schoolName = 
 
   </script>
   <!-- <script src="/public/assets/js/materialize.js"></script> -->
