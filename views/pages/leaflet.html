@@ -190,9 +190,12 @@
     }).addTo(mymap);
     mymap.scrollWheelZoom.disable();
 
+    var masterCluster = new L.MarkerClusterGroup();
+
     var libArray = new Array();
     var parkArray = new Array();
     var recArray = new Array();
+    var schoolArray = new Array();
 
     var libClicked = false;
     var parkClicked = false;
@@ -201,7 +204,8 @@
     document.getElementById("libBox").onclick = function() {
       if(libClicked) {
         for(var i = 0; i < libArray.length; i++) {
-          mymap.removeLayer(libArray[i]);
+          //mymap.removeLayer(libArray[i]);
+          masterCluster.removeLayer(libArray[i]);
         }
         libClicked = false;
       }
@@ -212,8 +216,9 @@
               icon: L.mapbox.marker.icon({'marker-symbol': 'library', 'marker-color': 'F1C40F'})
             });
             placeMarker.bindPopup(libraries[i].NAME);
+            masterCluster.addLayer(placeMarker);
             libArray.push(placeMarker);
-            mymap.addLayer(libArray[i]);
+            //mymap.addLayer(libArray[i]);
           }   
         });
         libClicked = true;
@@ -222,7 +227,8 @@
     document.getElementById("parkBox").onclick = function() {
       if(parkClicked) {
         for(var i = 0; i < parkArray.length; i++) {
-          mymap.removeLayer(parkArray[i]);
+          //mymap.removeLayer(parkArray[i]);
+          masterCluster.removeLayer(parkArray[i]);
         }
         parkClicked = false;
       }
@@ -233,8 +239,9 @@
               icon: L.mapbox.marker.icon({'marker-symbol': 'park', 'marker-color': '2ECC71'})
             });
             placeMarker.bindPopup(parks[i].NAME);
+            masterCluster.addLayer(placeMarker);
             parkArray.push(placeMarker);
-            mymap.addLayer(parkArray[i]);
+            //mymap.addLayer(parkArray[i]);
           }   
         });
         parkClicked = true;
@@ -244,6 +251,7 @@
       if(recClicked) {
         for(var i = 0; i < recArray.length; i++) {
           mymap.removeLayer(recArray[i]);
+          masterCluster.removeLayer(recArray[i]);
         }
         recClicked = false;
       }
@@ -255,8 +263,9 @@
               icon: L.mapbox.marker.icon({'marker-symbol': 'basketball', 'marker-color': 'E74C3C'})
             });
             placeMarker.bindPopup(recCenters[i].NAME);
+            masterCluster.addLayer(placeMarker);
             recArray.push(placeMarker);
-            mymap.addLayer(recArray[i]);
+            //mymap.addLayer(recArray[i]);
           }
         });
         recClicked = true;
@@ -274,17 +283,18 @@
       url: './schoolData',
       success: function(data) {
           var markers = new L.MarkerClusterGroup();
-          var markerList = [];
+          //var markerList = [];
           for (var i= 0; i < data.length; i++) {
             var marker = L.marker(new L.LatLng(data[i].LATITUDE, data[i].LONGITUDE), {
               icon: L.mapbox.marker.icon({'marker-symbol': 'school', 'marker-color': 'EE6E73'}),
               title: data[i].NAME
             });
             marker.bindPopup(data[i].NAME);
-            markers.addLayer(marker);
-            markerList.push(marker);
+            masterCluster.addLayer(marker);
+            schoolArray.push(marker);
+            //markerList.push(marker);
           }
-          mymap.addLayer(markers);
+          mymap.addLayer(masterCluster);
 
       }
     });
