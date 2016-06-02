@@ -8,6 +8,7 @@ var express  = require('express'),
 
 var dotenv = require('dotenv');
 var pg = require('pg');
+var leafletPip = require('leaflet-pip');
 
 //client id and client secret here, taken from .env (which you need to create)
 dotenv.load();

@@ -46,6 +46,74 @@ var districtData = {
 ]};
 
 
+//Adds number of schools to disrictData
+
+var geoJsonDistrict = L.geoJson(districtData);
+$.getJSON("./schoolData" , function(schools) {
+	for(var j = 0; j < schools.length; j++) {
+		var result = leafletPip.pointInLayer([schools[j].LONGITUDE, schools[j].LATITUDE], geoJsonDistrict, true);
+		locateAndIncrement(result[0].feature.properties.NAME, "SCHOOLS", false);
+	}
+});
+
+$.getJSON("./parkData", function(parks) {
+	for(var i = 0; i < parks.length; i++) {
+		var result = leafletPip.pointInLayer([parks[i].LONGITUDE, parks[i].LATITUDE], geoJsonDistrict, true);
+		locateAndIncrement(result[0].feature.properties.NAME, "PARKS", true)
+	}
+});
+
+$.getJSON("./libData", function(parks) {
+	for(var i = 0; i < parks.length; i++) {
+		var result = leafletPip.pointInLayer([parks[i].LONGITUDE, parks[i].LATITUDE], geoJsonDistrict, true);
+		locateAndIncrement(result[0].feature.properties.NAME, "PARKS", true)
+	}
+});
+
+$.getJSON("./recData", function(parks) {
+	for(var i = 0; i < parks.length; i++) {
+		var result = leafletPip.pointInLayer([parks[i].LONGITUDE, parks[i].LATITUDE], geoJsonDistrict, true);
+		locateAndIncrement(result[0].feature.properties.NAME, "PARKS", true)
+	}
+});
+
+//TODO Add EventBrite Data here
+
+function locateAndIncrement(name, toIncrement, calculateDensity) {
+	for(var i = 0; i < districtData.features.length; i++) {
+		var current = districtData.features[i];
+		if(current.properties.NAME == name){
+			if(toIncrement == "SCHOOLS") {
+				if(current.properties.SCHOOLS == undefined) {
+					current.properties.SCHOOLS = 1;
+				} else {
+					current.properties.SCHOOLS = parseInt(current.properties.SCHOOLS) + 1;
+				}
+			} else {
+				if(current.properties.THINGS == undefined) {
+					current.properties.THINGS = 1;
+				} else {
+					current.properties.THINGS = parseInt(current.properties.THINGS) + 1;
+				}
+			}
+
+			// console.log(current.properties);
+
+			if(calculateDensity == true) {
+				if(current.properties.SCHOOLS == 0)
+					current.properties.SCHOOLS == 1;
+				current.properties.DENSITY = parseInt(current.properties.THINGS) / parseInt(current.properties.SCHOOLS);
+				console.log(current.properties.DENSITY);
+			}
+		}
+	}
+}
+
+console.log(JSON.stringify(districtData));
+
+
+
+
 //Fix later
 
 // var schoolData;
@@ -63,21 +131,32 @@ var districtData = {
 // var densityArray = districtData.features;
 // console.log(densityArray);
 
-
 //var baseMaps = {#}
+
+var southWest = L.latLng(32.3, -117.9),
+		northEast = L.latLng(34, -115.4),
+		bounds = L.latLngBounds(southWest, northEast)
+
 var map = L.map('map', {
-	// Disables zoom //
-	scrollWheelZoom: false,
-	doubleClickZoom: false,
-	dragging: false,
-	zoomControl: false,
-	touchZoom: false
+	// Max boundary level //
+	maxBounds: bounds,
+
+	// Disables zoom initially //
+	scrollWheelZoom: true,
+	doubleClickZoom: true,
+	dragging: true,
+	zoomControl: true,
+	touchZoom: true
 }).setView([33, -116.8], 9);
 
 
 // Zoom Controlz //
 function allowZoom() {
 	map.dragging.enable()
+	map.scrollWheelZoom.enable()
+	map.doubleClickZoom.enable()
+	//map.zoomControl.enable()
+	map.touchZoom.enable()
 }
 
 function disableZoom() {
@@ -93,19 +172,18 @@ var title_layer = L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.
 var states_layer = L.geoJson(districtData).addTo(map);
 
 function getColor(d) {
-  return d > 20 ? '#800026' :
-         d > 15  ? '#BD0026' :
-         d > 10  ? '#E31A1C' :
-         d > 5  ? '#FC4E2A' :
-         d > 3   ? '#FD8D3C' :
-         d > 2   ? '#FEB24C' :
-         d > 1   ? '#FED976' :
+  return d > 5 ? '#800026' :
+         d > 4  ? '#BD0026' :
+         d > 3  ? '#E31A1C' :
+         d > 2  ? '#FC4E2A' :
+         d > 1.5   ? '#FD8D3C' :
+         d >= 1  ? '#FEB24C' :
+         d > 0   ? '#FED976' :
                     '#FFEDA0';
 }
 
 
 function style(feature) {
-  console.log(feature.properties);
   return {
       fillColor: getColor(feature.properties.DENSITY),
       weight: 2,
@@ -125,8 +203,8 @@ function highlightFeature(e) {
 
   layer.setStyle({
     weight: 5,
-    color: '#666',
-    dashArray: '',
+    color: '#808080',
+    dashArray: '3',
     fillOpacity: 0.7
   });
 
@@ -138,21 +216,25 @@ function highlightFeature(e) {
 }
 
 function resetHighlight(e) {
-geojson.resetStyle(e.target);
-info.update();
+	geojson.resetStyle(e.target);
+	info.update();
 }
 
-//function highlightSelected(e) {
-//	var layer = e.target;
-//	layer.setStyle( {
-//		weight: 3,
-//		color: '#666',
-//		dashArray: '',
-//		fillOpacity: 0.5
-//	});
-//	layer.bringToFront();
-//
-//}
+
+function highlightSelected(e) {
+	var layer = e.target;
+	layer.setStyle({
+		color: 'white',
+		weight: 2,
+		dashArray: '3',
+		opacity: 1,
+		fillOpacity: 0.7
+	});
+	zoomToFeature(e)
+	layer.bringToFront()
+	resetHighlight(e)
+}
+//map.on('click', highlightSelected)
 
 
 // Polygons? //
@@ -164,27 +246,14 @@ var geojson = L.geoJson(districtData, {
 
 // On click, zoomed-in map will be displayed //
 function zoomToFeature(e) {
-	Map(e.target);
+	generateNewMap(e.target);
 
 	//map.setView(e.latlng, 11)				// if you want it to zoom where mouse click occured
 	map.fitBounds(e.target.getBounds());	// if you want it to zooom to polygon boundary
+	//allowZoom()
+	//var selected_layer = e.target;
+	clearLayer()
 
-	var selected_layer = e.target;
-	map.removeLayer(selected_layer)
-	map.removeLayer(states_layer)
-	allowZoom()
-
-	//var layer = e.target;
-	//layer.setStyle({
-    //weight: 5,
-    //color: '#222',
-    //dashArray: '',
-    //fillOpacity: 0.7
-  	//});
-	//map.addLayer(layer);
-
-	//resetBaseMap();
-	//reset(selected_layer)
 }
 
 
@@ -201,7 +270,7 @@ function onEachFeature(feature, layer) {
 layer.on({
   mouseover: highlightFeature,
   mouseout: resetHighlight,
-  click: zoomToFeature
+  click: highlightSelected
 });
 }
 
@@ -225,7 +294,7 @@ var info = L.control();
 
 info.update = function (props) {
 	this._div.innerHTML = '<h4>Things to Do</h4>' + (props ?
-	'<b>' + props.NAME + '</b><br/>' + props.DENSITY + ' things to do per school' : 'Hover over an area');
+	'<b>' + props.NAME + '</b><br/>' + props.DENSITY + ' people / mi<sup>2</sup>' : 'Hover over an area');
 };
 
 info.addTo(map);
@@ -238,7 +307,7 @@ var legend = L.control({position: 'bottomright'});
 legend.onAdd = function(map) {
 
 var div = L.DomUtil.create('div', 'info legend'),
-    grades = [0, 1, 2, 3, 5, 10, 15, 20],
+    grades = [0, 1, 1.5, 2, 3, 4, 5,10],
     labels = [];
 
     for (var i = 0; i < grades.length; i++) {
@@ -267,7 +336,7 @@ var ourCustomControl = L.Control.extend({
     container.style.backgroundSize = "29px 29px";
     container.style.width = '30px';
     container.style.height = '30px';
- 	container.style.backgroundImage = "url(https://cdn2.iconfinder.com/data/icons/arrows-set-2/512/6-512.png)";
+ 	container.style.backgroundImage = "url(http://icons.iconarchive.com/icons/icons8/ios7/128/Very-Basic-Reload-icon.png)";
 
     container.onclick = function(){
       console.log('buttonClicked');
@@ -283,7 +352,7 @@ map.addControl(new ourCustomControl());
 // Legend //
 legend.addTo(map);
 
-function Map(data) {
+function generateNewMap(data) {
   var newData =   { "type": "FeatureCollection",
     "features": [
       { "type": "Feature",
@@ -296,7 +365,7 @@ function Map(data) {
         }
        ]
      };
-     console.log(newData);
+     //console.log(newData);
   // var newMap = L.map('chloropleth').setView([33, -116.8], 9);
 
 }
