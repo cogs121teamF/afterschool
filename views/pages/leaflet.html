@@ -24,6 +24,10 @@
   <link href="https://api.mapbox.com/mapbox.js/plugins/leaflet-markercluster/v0.4.0/MarkerCluster.css" rel="stylesheet">
   <link href="https://api.mapbox.com/mapbox.js/plugins/leaflet-markercluster/v0.4.0/MarkerCluster.Default.css" rel="stylesheet">
 
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+  <script src="assets/js/jquery.easy-autocomplete.min.js"></script>
+  <link rel="stylesheet" href="assets/css/easy-autocomplete.min.css">
+
   <style>
     #map { height: 500px; }
   </style>
@@ -62,7 +66,8 @@
           <a href="#" class="brand-logo left"style="padding-left:10px; padding-top:10px"> <img class="responsive-img" src="assets/img/logo.png" alt="afterschool" style="height: 45px;line-height: 45px;"></a>
           <ul class="left" style="padding-left:120px">
             <li>
-              <input placeholder="Enter School Name" id="schoolName" type="text" class="validate">
+              <input id="schoolName">
+              <!--<input placeholder="Enter School Name" id="schoolName" type="text" class="searchBar">-->
             </li>
             <li><a href="#mapsSection">Map</a></li>
          </ul>
@@ -72,6 +77,18 @@
         </div>
       </nav>
     </div>
+    <script>
+      var options = {
+        url: "./schoolData",
+        getValue: "NAME",
+        list: {
+          match: {
+            enabled: true
+          }
+        }
+      };
+      $("#schoolName").easyAutocomplete(options);
+  </script>
 
   <div class="container">
 
@@ -300,6 +317,7 @@
     });
 
   </script>
+
   <!-- <script src="/public/assets/js/materialize.js"></script> -->
   <script src="assets/js/init.js"></script>
 
