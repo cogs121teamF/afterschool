@@ -32,39 +32,39 @@ exports.router = {
     schoolData: function(req, res) {
         var schoolQuery = "SELECT * " +
                 " FROM cogs121_16_raw.sandag_places_project" +
-                " WHERE \"TYPE\" = 'School'" + 
+                " WHERE \"TYPE\" = 'School'" +
                 " AND \"LATITUDE\" <  32.95  AND \"LATITUDE\" >  32.62" +
-                " AND \"LONGITUDE\" > -117.258 AND \"LONGITUDE\" < -116.977" + 
-                " AND \"NAME\" LIKE '%Elementary%'" + 
+                " AND \"LONGITUDE\" > -117.258 AND \"LONGITUDE\" < -116.977" +
+                " AND \"NAME\" LIKE '%Elementary%'" +
                 " ORDER BY \"NAME\" ASC;";
         makeQuery(req, res, schoolQuery, './schoolData.json');
     },
     parkData: function(req, res) {
         var parkQuery = "SELECT * " +
             " FROM cogs121_16_raw.sandag_places_project" +
-            " WHERE \"TYPE\" = 'Park'" + 
+            " WHERE \"TYPE\" = 'Park'" +
             " AND \"LATITUDE\" <  32.95  AND \"LATITUDE\" >  32.62" +
-            " AND \"LONGITUDE\" > -117.258 AND \"LONGITUDE\" < -116.977" + 
-            " AND \"NAME\" LIKE '%Park%'" + 
+            " AND \"LONGITUDE\" > -117.258 AND \"LONGITUDE\" < -116.977" +
+            " AND \"NAME\" LIKE '%Park%'" +
             " ORDER BY \"NAME\" ASC;";
         makeQuery(req, res, parkQuery, './parkData.json');
     },
     recData: function(req, res) {
         var recQuery = "SELECT * " +
             " FROM cogs121_16_raw.sandag_places_project" +
-            " WHERE \"TYPE\" = 'Park'" + 
+            " WHERE \"TYPE\" = 'Park'" +
             " AND \"LATITUDE\" <  32.95  AND \"LATITUDE\" >  32.62" +
-            " AND \"LONGITUDE\" > -117.258 AND \"LONGITUDE\" < -116.977" + 
-            " AND \"NAME\" LIKE '%Recreation%'" + 
+            " AND \"LONGITUDE\" > -117.258 AND \"LONGITUDE\" < -116.977" +
+            " AND \"NAME\" LIKE '%Recreation%'" +
             " ORDER BY \"NAME\" ASC;";
         makeQuery(req, res, recQuery, './recData.json');
     },
     libData: function(req, res) {
         var libQuery = "SELECT * " +
             " FROM cogs121_16_raw.sandag_places_project" +
-            " WHERE \"TYPE\" = 'Library'" + 
+            " WHERE \"TYPE\" = 'Library'" +
             " AND \"LATITUDE\" <  32.95  AND \"LATITUDE\" >  32.62" +
-            " AND \"LONGITUDE\" > -117.258 AND \"LONGITUDE\" < -116.977" + 
+            " AND \"LONGITUDE\" > -117.258 AND \"LONGITUDE\" < -116.977" +
             " ORDER BY \"NAME\" ASC;";
         makeQuery(req, res, libQuery, './libData.json');
     }

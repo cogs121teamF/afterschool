@@ -32,7 +32,7 @@ var mymap = L.map('map').setView([32.77, -117.19], 11);
             placeMarker.bindPopup(libraries[i].NAME);
             libArray.push(placeMarker);
             mymap.addLayer(libArray[i]);
-          }   
+          }
         });
         libClicked = true;
       }
@@ -53,7 +53,7 @@ var mymap = L.map('map').setView([32.77, -117.19], 11);
             placeMarker.bindPopup(parks[i].NAME);
             parkArray.push(placeMarker);
             mymap.addLayer(parkArray[i]);
-          }   
+          }
         });
         parkClicked = true;
       }
