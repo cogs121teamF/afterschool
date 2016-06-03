@@ -50,7 +50,7 @@
     <div class="header">
       <img class="responsive-img" src="assets/img/logo.png" alt="logo" style="display: inline-block;height: 180px;line-height: 180px;">
       <p style="padding-left:50px;padding-right:50px;">Afterschool helps parents find fun, educational and safe activities for their children to engage in. With afterschool, parents can help their children use their most crucial developmental years to get involved with their community, learn new skills and mature.</p>
-      <a href="#mainSection" class="waves-effect waves-teal btn-flat" id="button" style="font-weight:bold; width:300px">Get Started</a>
+      <a href="#mainSection" class="waves-effect waves-teal btn-flat page-scroll" id="button" style="font-weight:bold; width:300px">Get Started</a>
     </div>
   </div>
   </div>
@@ -67,7 +67,7 @@
             <li><a href="#mapsSection">Map</a></li>
          </ul>
           <ul class="right" style="padding-right:10px">
-            <li><a href="#statisticsSection">Why it Matters</a></li>
+            <li><a class="page-scroll" href="#statisticsSection">Why it Matters</a></li>
           </ul>
         </div>
       </nav>
@@ -290,6 +290,17 @@
 
   <!-- Compiled and minified JavaScript -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/js/materialize.min.js"></script>
+  <script stc="assets/js/easing.js"></script>
+
+  <script>
+    $('a.page-scroll').bind('click', function(event) {
+        var $anchor = $(this);
+        $('html, body').stop().animate({
+            scrollTop: ($($anchor.attr('href')).offset().top /*- 50*/)
+        }, 1250, 'easeInOutExpo');
+        event.preventDefault();
+    });
+  </script>
 
   </body>
 </html>
