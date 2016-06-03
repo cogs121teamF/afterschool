@@ -33,8 +33,6 @@ exports.router = {
         var schoolQuery = "SELECT * " +
                 " FROM cogs121_16_raw.sandag_places_project" +
                 " WHERE \"TYPE\" = 'School'" + 
-                " AND \"LATITUDE\" <  32.95  AND \"LATITUDE\" >  32.62" +
-                " AND \"LONGITUDE\" > -117.258 AND \"LONGITUDE\" < -116.977" + 
                 " AND \"NAME\" LIKE '%Elementary%'" + 
                 " ORDER BY \"NAME\" ASC;";
         makeQuery(req, res, schoolQuery, './schoolData.json');
@@ -43,8 +41,6 @@ exports.router = {
         var parkQuery = "SELECT * " +
             " FROM cogs121_16_raw.sandag_places_project" +
             " WHERE \"TYPE\" = 'Park'" + 
-            " AND \"LATITUDE\" <  32.95  AND \"LATITUDE\" >  32.62" +
-            " AND \"LONGITUDE\" > -117.258 AND \"LONGITUDE\" < -116.977" + 
             " AND \"NAME\" LIKE '%Park%'" + 
             " ORDER BY \"NAME\" ASC;";
         makeQuery(req, res, parkQuery, './parkData.json');
@@ -53,8 +49,6 @@ exports.router = {
         var recQuery = "SELECT * " +
             " FROM cogs121_16_raw.sandag_places_project" +
             " WHERE \"TYPE\" = 'Park'" + 
-            " AND \"LATITUDE\" <  32.95  AND \"LATITUDE\" >  32.62" +
-            " AND \"LONGITUDE\" > -117.258 AND \"LONGITUDE\" < -116.977" + 
             " AND \"NAME\" LIKE '%Recreation%'" + 
             " ORDER BY \"NAME\" ASC;";
         makeQuery(req, res, recQuery, './recData.json');
@@ -63,8 +57,6 @@ exports.router = {
         var libQuery = "SELECT * " +
             " FROM cogs121_16_raw.sandag_places_project" +
             " WHERE \"TYPE\" = 'Library'" + 
-            " AND \"LATITUDE\" <  32.95  AND \"LATITUDE\" >  32.62" +
-            " AND \"LONGITUDE\" > -117.258 AND \"LONGITUDE\" < -116.977" + 
             " ORDER BY \"NAME\" ASC;";
         makeQuery(req, res, libQuery, './libData.json');
     }
