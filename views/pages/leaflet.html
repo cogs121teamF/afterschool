@@ -69,7 +69,7 @@
               <input id="schoolName">
               <!--<input placeholder="Enter School Name" id="schoolName" type="text" class="searchBar">-->
             </li>
-            <li><a href="#mapsSection">Map</a></li>
+            <li><a href="#mapsSection" id="searchButton">Search</a></li>
          </ul>
           <ul class="right" style="padding-right:10px">
             <li><a class="page-scroll" href="#statisticsSection">Why it Matters</a></li>
@@ -206,6 +206,18 @@
       accessToken: 'pk.eyJ1IjoicGphbWFzMTgwIiwiYSI6ImNpb3AzN2szMzAwMmp1cGtxZzVxZHlnYW8ifQ.Ml7vL74HZOhLKcF2qNQ58g'
     }).addTo(mymap);
     mymap.scrollWheelZoom.disable();
+
+    document.getElementById("searchButton").onclick = function() {
+      var searchInput = $("#schoolName")[0].value;
+      //console.log(searchInput);
+      $.getJSON("./schoolData", function(schools) {
+        for(var i = 0; i < schools.length; i++) {
+          if(schools[i].NAME == searchInput) {
+            mymap.setView([schools[i].LATITUDE, schools[i].LONGITUDE], 16);
+          }
+        }
+      });
+    }
 
     var masterCluster = new L.MarkerClusterGroup();
 
