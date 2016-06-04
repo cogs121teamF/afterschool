@@ -78,11 +78,21 @@
     <div id="mapSection">
       <div class="section">
         <h3>School Name</h3>
+        <p>Map Type</p>
+        <div class="switch">
+            <label>
+              Cluster
+              <input type="checkbox" id="mapToggle">
+              <span class="lever"></span>
+              Heatmap
+            </label>
+          </div>
       </div>
       <p><input type="checkbox" id="libBox" value="second_checkbox"><label for="libBox">Libraries</label></p>
       <p><input type="checkbox" id="parkBox" value="second_checkbox"><label for="parkBox">Parks</label></p>
       <p><input type="checkbox" id="recBox" value="second_checkbox"><label for="recBox">Recreational Centers</label></p>
       <div id="map"></div>
+      <div id="default"></div>
     </div>
   </div>
 
@@ -182,8 +192,20 @@
   <script src="assets/js/leafletpip.min.js"></script>
  <!--  <script src="assets/js/regularMap.js"/> -->
   <script src="assets/js/chloropleth.js"></script>
-  <script s
-  <!-- <script src="/public/assets/js/materialize.js"></script> -->
+  <script>
+    function toggleDiv(){
+      if($(this).is(':checked')) {
+        $("#map").hide();
+      } else {
+        $("#map").show();
+      }
+    }
+
+    $(function(){
+      $("#mapToggle").change(toggleDiv).trigger('change');
+    });
+  </script>
+  <script src="/public/assets/js/materialize.js"></script>
   <script src="assets/js/init.js"></script>
 
   <!-- Compiled and minified JavaScript -->

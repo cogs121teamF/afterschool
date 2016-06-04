@@ -167,6 +167,10 @@ function locateAndIncrement(name, toIncrement, calculateDensity, object) {
 	}
 }
 
+for(var i = 0; i < districtData.features.length; i++){
+	console.log("'DENSITY : " + districtData.features[i].properties.DENSITY + "' , 'NAME : ' '" + districtData.features[i].properies.NAME + "''");
+}
+
 //Fix later
 
 // var schoolData;
