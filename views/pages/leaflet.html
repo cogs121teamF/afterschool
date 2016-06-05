@@ -202,21 +202,26 @@
   </footer>
   <div>
 
-
-
-
   <!--  Scripts-->
   <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+  <script src="assets/js/leaflet-routing-machine.js"></script>
   <script>
     var mymap = L.map('map').setView([32.87, -116.89], 10);
     L.mapbox.accessToken = 'pk.eyJ1IjoicGphbWFzMTgwIiwiYSI6ImNpb3AzN2szMzAwMmp1cGtxZzVxZHlnYW8ifQ.Ml7vL74HZOhLKcF2qNQ58g';
     L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
-      /*attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>',*/
       maxZoom: 18,
       id: 'pjamas180.084e08al',
       accessToken: 'pk.eyJ1IjoicGphbWFzMTgwIiwiYSI6ImNpb3AzN2szMzAwMmp1cGtxZzVxZHlnYW8ifQ.Ml7vL74HZOhLKcF2qNQ58g'
     }).addTo(mymap);
     mymap.scrollWheelZoom.disable();
+
+    var control = L.Routing.control({
+      waypoints: [
+        /* Number of waypoints on the map starts at 0 */
+      ],
+      routeWhileDragging: true
+    }).addTo(mymap);
+
 
     document.getElementById("searchButton").onclick = function() {
       var searchInput = $("#schoolName")[0].value;
@@ -255,7 +260,40 @@
             var placeMarker = L.marker(new L.LatLng(libraries[i].LATITUDE, libraries[i].LONGITUDE), {
               icon: L.mapbox.marker.icon({'marker-symbol': 'library', 'marker-color': 'F1C40F'})
             });
-            placeMarker.bindPopup(libraries[i].NAME);
+
+            var container = L.DomUtil.create('div'),
+                title     = addTitle(libraries[i].NAME, container),
+                startBtn  = createButton('Start', container),
+                destBtn   = createButton('End', container);
+            var popup = L.popup()
+              .setContent(container);
+            placeMarker.bindPopup(popup);
+
+            var location = null;
+            
+            placeMarker.on('click', function(e) {
+              location = e.latlng;
+            });
+
+            L.DomEvent.on(startBtn, 'click', function() {
+              // If there are no dest points on the map, add a point instead of replace
+              if ( control.getWaypoints().length == 0 ) {
+                control.spliceWaypoints(0, 0, location);
+              } else {
+                control.spliceWaypoints(0, 1, location);
+              }
+              mymap.closePopup();
+            });
+
+            L.DomEvent.on(destBtn, 'click', function() {
+              if ( control.getWaypoints().length == 0 ) {
+                control.spliceWaypoints(control.getWaypoints().length - 1, 0, location);
+              } else {
+                control.spliceWaypoints(control.getWaypoints().length - 1, 1, location);
+              }
+              mymap.closePopup();
+            });  
+            
             masterCluster.addLayer(placeMarker);
             libArray.push(placeMarker);
             //mymap.addLayer(libArray[i]);
@@ -278,7 +316,39 @@
             var placeMarker = L.marker(new L.LatLng(parks[i].LATITUDE, parks[i].LONGITUDE), {
               icon: L.mapbox.marker.icon({'marker-symbol': 'park', 'marker-color': '2ECC71'})
             });
-            placeMarker.bindPopup(parks[i].NAME);
+            var container = L.DomUtil.create('div'),
+                title     = addTitle(parks[i].NAME, container),
+                startBtn  = createButton('Start', container),
+                destBtn   = createButton('End', container);
+            var popup = L.popup()
+              .setContent(container);
+            placeMarker.bindPopup(popup);
+
+            var location = null;
+            
+            placeMarker.on('click', function(e) {
+              location = e.latlng;
+            });
+
+            L.DomEvent.on(startBtn, 'click', function() {
+              // If there are no dest points on the map, add a point instead of replace
+              if ( control.getWaypoints().length == 0 ) {
+                control.spliceWaypoints(0, 0, location);
+              } else {
+                control.spliceWaypoints(0, 1, location);
+              }
+              mymap.closePopup();
+            });
+
+            L.DomEvent.on(destBtn, 'click', function() {
+              if ( control.getWaypoints().length == 0 ) {
+                control.spliceWaypoints(control.getWaypoints().length - 1, 0, location);
+              } else {
+                control.spliceWaypoints(control.getWaypoints().length - 1, 1, location);
+              }
+              mymap.closePopup();
+            });   
+
             masterCluster.addLayer(placeMarker);
             parkArray.push(placeMarker);
             //mymap.addLayer(parkArray[i]);
@@ -302,7 +372,39 @@
             var placeMarker = L.marker(new L.LatLng(recCenters[i].LATITUDE, recCenters[i].LONGITUDE), {
               icon: L.mapbox.marker.icon({'marker-symbol': 'basketball', 'marker-color': 'E74C3C'})
             });
-            placeMarker.bindPopup(recCenters[i].NAME);
+            var container = L.DomUtil.create('div'),
+                title     = addTitle(recCenters[i].NAME, container),
+                startBtn  = createButton('Start', container),
+                destBtn   = createButton('End', container);
+            var popup = L.popup()
+              .setContent(container);
+            placeMarker.bindPopup(popup);
+
+            var location = null;
+            
+            placeMarker.on('click', function(e) {
+              location = e.latlng;
+            });
+
+            L.DomEvent.on(startBtn, 'click', function() {
+              // If there are no dest points on the map, add a point instead of replace
+              if ( control.getWaypoints().length == 0 ) {
+                control.spliceWaypoints(0, 0, location);
+              } else {
+                control.spliceWaypoints(0, 1, location);
+              }
+              mymap.closePopup();
+            });
+
+            L.DomEvent.on(destBtn, 'click', function() {
+              if ( control.getWaypoints().length == 0 ) {
+                control.spliceWaypoints(control.getWaypoints().length - 1, 0, location);
+              } else {
+                control.spliceWaypoints(control.getWaypoints().length - 1, 1, location);
+              }
+              mymap.closePopup();
+            });  
+ 
             masterCluster.addLayer(placeMarker);
             recArray.push(placeMarker);
             //mymap.addLayer(recArray[i]);
@@ -329,15 +431,59 @@
               icon: L.mapbox.marker.icon({'marker-symbol': 'school', 'marker-color': 'EE6E73'}),
               title: data[i].NAME
             });
-            marker.bindPopup(data[i].NAME);
+            var container = L.DomUtil.create('div'),
+                title     = addTitle(data[i].NAME, container),
+                startBtn  = createButton('Start', container),
+                destBtn   = createButton('End', container);
+            var popup = L.popup()
+              .setContent(container);
+            marker.bindPopup(popup);
+
+            var location = null;
+            
+            marker.on('click', function(e) {
+              location = e.latlng;
+            });
+
+            L.DomEvent.on(startBtn, 'click', function() {
+              // If there are no dest points on the map, add a point instead of replace
+              if ( control.getWaypoints().length == 0 ) {
+                control.spliceWaypoints(0, 0, location);
+              } else {
+                control.spliceWaypoints(0, 1, location);
+              }
+              mymap.closePopup();
+            });
+
+            L.DomEvent.on(destBtn, 'click', function() {
+              if ( control.getWaypoints().length == 0 ) {
+                control.spliceWaypoints(control.getWaypoints().length - 1, 0, location);
+              } else {
+                control.spliceWaypoints(control.getWaypoints().length - 1, 1, location);
+              }
+              mymap.closePopup();
+            });  
+
             masterCluster.addLayer(marker);
             schoolArray.push(marker);
-            //markerList.push(marker);
           }
           mymap.addLayer(masterCluster);
 
       }
-    });
+    });  
+
+    function createButton(label, container) {
+      var btn = L.DomUtil.create('button', '', container);
+      btn.setAttribute('type', 'button');
+      btn.innerHTML = label;
+      return btn;
+    }
+
+    function addTitle(content, container) {
+      var title = L.DomUtil.create('h3', '', container);
+      title.innerHTML = content;
+      return title;
+    }
 
   </script>
 
@@ -357,7 +503,6 @@
         event.preventDefault();
     });
   </script>
-  <script src="assets/js/leaflet-routing-machine.js"></script>
 
   </body>
 </html>
