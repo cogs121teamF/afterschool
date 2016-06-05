@@ -49,7 +49,7 @@
 
 .easy-autocomplete.eac-blue-light ul li.selected,
 .easy-autocomplete.eac-blue-light ul .eac-category.selected {
-    background-color: #ecf5fc
+    background-color: #f00000
 }
 
 .easy-autocomplete.eac-green-light input:hover,
@@ -333,22 +333,26 @@
     padding: 6px 12px
 }
 
+/* EDIT THESE TO EDIT THE ITEMS */
 .easy-autocomplete-container {
     left: 0;
     position: absolute;
     width: 100%;
-    z-index: 2
+    z-index: 2;
+    background-color: #4DB6AC;
 }
 
 .easy-autocomplete-container ul {
-    background: none repeat scroll 0 0 #ffffff;
+    background: none repeat scroll 0 0 #f00000;
     border-top: 1px dotted #ccc;
     display: none;
     margin-top: 0;
     padding-bottom: 0;
     padding-left: 0;
     position: relative;
-    top: -1px
+    top: -1px;
+    width:100%;
+    z-index:1000;
 }
 
 .easy-autocomplete-container ul li,
@@ -360,7 +364,9 @@
     display: block;
     font-size: 14px;
     font-weight: normal;
-    padding: 4px 12px
+    padding: 4px 12px;
+    width:100%;
+    z-index:1000;
 }
 
 .easy-autocomplete-container ul li:last-child {
