@@ -124,8 +124,8 @@
         <input type="checkbox" id="recBox" value="second_checkbox">
         <label for="recBox">Recreational Centers</label>
       </p>
-      <h4 style="margin-left:15px;">Events</h3>
-        <div id="events"></div>
+        <ul id="events" class="collection with-header">
+        </ul>
     </div>
       <div class="map">
         <h5 style="float:left;">Map</h5>
@@ -497,12 +497,12 @@
     });  
 
     var eventData = {};
-    var eventString ="";
+    var eventString ="<li class=\"collection-header\"><h4>Events</h4></li>";
     $.getJSON('https://www.eventbriteapi.com/v3/events/search/?token=2R5MTFHTE6WEWVSJO7DC&location.latitude=32.87&location.longitude=-116.89&location.within=30mi&sort_by=best&categories=115&subcategories=15005', function(data) {
         eventData = data.events;
         console.log(eventData);
         for(var i = 0; i < eventData.length; i++) {
-          eventString = eventString + "<p><a href=" + eventData[i].url + "\" target=\"_blank\">" + eventData[i].name.text + "</a></p>";
+          eventString = eventString + "<li><a href=" + eventData[i].url + "\" target=\"_blank\" class=\"collection-item\">" + eventData[i].name.text + "</a></li>";
         }
 
         console.log(eventString);

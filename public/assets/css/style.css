@@ -34,12 +34,24 @@ body{ margin:0px 0px; }
 #body {
   font-family: "Futura", sans-serif;
 }
+
+.legend p{
+  padding-left: 12px;
+}
+
+.legend label{
+  color:#474D4D;
+}
+
+.legend h4{
+  color: rgb(128, 203, 196);
+}
 #button{
   color:white;
   border: 3px solid #80cbc4; 
 }
 #button:hover{
-  background-color:#80cbc4;
+  background-color: #80cbc4;
 }
 
 #content{
@@ -80,6 +92,7 @@ body{ margin:0px 0px; }
   border-bottom: none;
   background-color: #80cbc4; 
   padding-left: 10px; 
+  margin-bottom: 0px;
 
 }
 
@@ -126,5 +139,6 @@ footer ul.icon li:before {
 }
 
 #events {
-  font-size: 12px;
+  margin-left: 15px;
 }
+
