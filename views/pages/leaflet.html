@@ -15,7 +15,8 @@
   <link href="https://api.mapbox.com/mapbox.js/plugins/leaflet-markercluster/v0.4.0/MarkerCluster.css" rel="stylesheet">
   <link href="https://api.mapbox.com/mapbox.js/plugins/leaflet-markercluster/v0.4.0/MarkerCluster.Default.css" rel="stylesheet">
   <link rel="stylesheet" href="assets/css/easy-autocomplete.min.css">
-  <link rel="stylesheet" href="assets/css/leaflet-routing-machine.css" />
+  <link rel="stylesheet" href="assets/css/leaflet-routing-machine.css"/>
+  <link rel="stylesheet" href="assets/css/Control.Geocoder.css"/>
 
   <!-- Scripts -->
   <script src="assets/js/leaflet.js"></script>
@@ -23,6 +24,7 @@
   <script src="https://api.mapbox.com/mapbox.js/plugins/leaflet-markercluster/v0.4.0/leaflet.markercluster.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
   <script src="assets/js/jquery.easy-autocomplete.min.js"></script>
+  <script src="assets/js/Control.Geocoder.js"></script>
 
 </head>
 <body>
@@ -108,7 +110,7 @@
       <h4 style="margin-left:15px;">Events</h3>
     </div>
       <div class="map">
-        <h5>Map</h5>
+        <h5 style="float:left;">Map</h5>
         <div id="map" style="z-index:1"></div>
       </div>
     </div>
@@ -219,7 +221,9 @@
       waypoints: [
         /* Number of waypoints on the map starts at 0 */
       ],
-      routeWhileDragging: true
+      routeWhileDragging: true,
+      geocoder: L.Control.Geocoder.nominatim(),
+      addWaypoints: true
     }).addTo(mymap);
 
 
@@ -293,7 +297,7 @@
               }
               mymap.closePopup();
             });  
-            
+
             masterCluster.addLayer(placeMarker);
             libArray.push(placeMarker);
             //mymap.addLayer(libArray[i]);
@@ -451,6 +455,7 @@
                 control.spliceWaypoints(0, 0, location);
               } else {
                 control.spliceWaypoints(0, 1, location);
+                $('.leaflet-routing-container').show();
               }
               mymap.closePopup();
             });
@@ -460,6 +465,7 @@
                 control.spliceWaypoints(control.getWaypoints().length - 1, 0, location);
               } else {
                 control.spliceWaypoints(control.getWaypoints().length - 1, 1, location);
+                $('.leaflet-routing-container').show();
               }
               mymap.closePopup();
             });  
@@ -484,6 +490,22 @@
       title.innerHTML = content;
       return title;
     }
+
+  </script>
+  <script>
+  
+    var x = $('.leaflet-routing-add-waypoint').hide();
+    
+    if(control.getWaypoints().length == 2) {
+      $('.leaflet-routing-container').hide();
+    }
+    $('.leaflet-routing-remove-waypoint').click(function() {
+      console.log("remove button clicked");
+      if(control.getWaypoints().length==2) {
+        $('.leaflet-routing-geocoders').hide();
+      }
+    });
+    
 
   </script>
 
