@@ -124,3 +124,7 @@ footer ul.icon li:before {
 .searchBar {
   color: black;
 }
+
+#events {
+  font-size: 12px;
+}
