@@ -64,10 +64,18 @@
         list: {
           match: {
             enabled: true
+          },
+          onClickEvent: function() {
+              $("#searchButton").click();
           }
         }
       };
       $("#schoolName").easyAutocomplete(options);
+      $("#schoolName").keyup(function(event){
+          if(event.keyCode == 13){
+              $("#searchButton").click();
+          }
+      });
   </script>
 
   <style>
