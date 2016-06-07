@@ -588,10 +588,18 @@
     function toggleDiv(){
       if($(this).is(':checked')) {
         $("#map").hide();
+        $("#route_button").hide();
         $("#chloropleth").show();
+        $("#recBox").prop('disabled', true);
+        $("#libBox").prop('disabled', true);
+        $("#parkBox").prop('disabled', true);
       } else {
         $("#map").show();
+        $("#route_button").show();
         $("#chloropleth").hide();
+        $("#recBox").prop('disabled', false);
+        $("#libBox").prop('disabled', false);
+        $("#parkBox").prop('disabled', false);
       }
     }
 

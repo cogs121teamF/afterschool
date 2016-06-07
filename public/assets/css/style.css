@@ -30,16 +30,16 @@ body{ margin:0px 0px; }
     color: #777;
 }
 
-.legend {
-    line-height: 18px;
-    color: #555;
+.c_legend {
+    line-height: 18px; !important;
+    color: #555; !important;
 }
-.legend i {
-    width: 18px;
-    height: 18px;
-    float: left;
-    margin-right: 8px;
-    opacity: 0.7;
+.c_legend i {
+    width: 18px; !important;
+    height: 18px; !important;
+    float: left; !important;
+    margin-right: 8px; !important;
+    opacity: 0.7; !important;
 }
 
 .header{
