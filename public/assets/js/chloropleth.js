@@ -235,23 +235,23 @@ var title_layer = L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.
 var states_layer = L.geoJson(districtData).addTo(map);
 
 function getColor(d) {
-  return d > 5 ? '#800026' :
-         d > 4  ? '#BD0026' :
-         d > 3  ? '#E31A1C' :
-         d > 2  ? '#FC4E2A' :
-         d > 1.5   ? '#FD8D3C' :
-         d >= 1  ? '#FEB24C' :
+  return d > 4 ? '#800026' :
+         d > 3  ? '#BD0026' :
+         d > 2  ? '#E31A1C' :
+         d > 1.5  ? '#FC4E2A' :
+         d > 1   ? '#FD8D3C' :
+         d >= .5  ? '#FEB24C' :
          d > 0   ? '#FED976' :
                     'false';
 }
 
 function getOpacity(d) {
-	return d > 5 ? .7 :
-				 d > 4  ? .6 :
-				 d > 3  ? .5 :
-				 d > 2  ? .4 :
-				 d > 1.5   ? .4 :
-				 d >= 1  ? .4  :
+	return d > 4 ? .7 :
+				 d > 3  ? .6 :
+				 d > 2  ? .5 :
+				 d > 1.5  ? .4 :
+				 d > 1   ? .4 :
+				 d >= .5  ? .4  :
 				 d > 0   ? .4 :
 										0;
 }
@@ -434,20 +434,19 @@ info.update = function (props) {
 info.addTo(map);
 
 
-
 // Legend //
 var legend = L.control({position: 'bottomright'});
 
 legend.onAdd = function(map) {
 
 var div = L.DomUtil.create('div', 'info c_legend'),
-    grades = [0, 1, 1.5, 2, 3, 4, 5,10],
+    grades = [0, .5, 1, 1.5, 2, 3, 4],
     labels = [];
 
     for (var i = 0; i < grades.length; i++) {
         div.innerHTML +=
             '<i style="background:' + getColor(grades[i] + 1) + '"></i> ' +
-            grades[i] + (grades[i + 1] ? '&ndash;' + grades[i + 1] + '<br>' : '+');
+            grades[i] + (grades[i + 1] ? ' &ndash; ' + grades[i + 1] + '<br>' : '+');
     }
 
     return div;
