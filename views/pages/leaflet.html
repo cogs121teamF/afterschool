@@ -147,7 +147,7 @@
             </div>
         </div>
 
-        <button class="btn tooltipped" data-position="left" data-delay="50" data-tooltip="To route, click on two points on the map, choose a start and end point and click Show Route! To hide, click Hide Route." id="route_button" type="button" style="float:right; margin-right:17px; margin-top:10px; margin-bottom:10px; background-color:#F8D54F">Show Route</button>
+        <button class="btn tooltipped" data-position="left" data-delay="50" data-tooltip="To find a route, click on a start and end point on the map. To hide the directions box, click the Hide button. To view it again, click the Show button." id="route_button" type="button" style="float:right; margin-right:17px; margin-top:10px; margin-bottom:10px; background-color:#F8D54F">Show</button>
         <div id="map" style="z-index:1"></div>
         <div id="chloropleth" style="z-index:1"></div>
       </div>
@@ -327,9 +327,9 @@
               } else {
                 control.spliceWaypoints(0, 1, location);
                 $('.leaflet-routing-container').show();
-                if($('#route_button').html() == "Show Route"){
+                if($('#route_button').html() == "Show"){
                   $('.leaflet-routing-container').show();
-                  $('#route_button').html('Hide Route');
+                  $('#route_button').html('Hide');
                 }
 
               }
@@ -342,9 +342,9 @@
               } else {
                 control.spliceWaypoints(control.getWaypoints().length - 1, 1, location);
                 $('.leaflet-routing-container').show();
-                if($('#route_button').html() == "Show Route"){
+                if($('#route_button').html() == "Show"){
                   $('.leaflet-routing-container').show();
-                  $('#route_button').html('Hide Route');
+                  $('#route_button').html('Hide');
                 }
               }
               mymap.closePopup();
@@ -393,9 +393,9 @@
               } else {
                 control.spliceWaypoints(0, 1, location);
                 $('.leaflet-routing-container').show();
-                if($('#route_button').html() == "Show Route"){
+                if($('#route_button').html() == "Show"){
                   $('.leaflet-routing-container').show();
-                  $('#route_button').html('Hide Route');
+                  $('#route_button').html('Hide');
                 }
 
               }
@@ -408,9 +408,9 @@
               } else {
                 control.spliceWaypoints(control.getWaypoints().length - 1, 1, location);
                 $('.leaflet-routing-container').show();
-                if($('#route_button').html() == "Show Route"){
+                if($('#route_button').html() == "Show"){
                   $('.leaflet-routing-container').show();
-                  $('#route_button').html('Hide Route');
+                  $('#route_button').html('Hide');
                 }
               }
               mymap.closePopup();
@@ -460,9 +460,9 @@
               } else {
                 control.spliceWaypoints(0, 1, location);
                 $('.leaflet-routing-container').show();
-                if($('#route_button').html() == "Show Route"){
+                if($('#route_button').html() == "Show"){
                   $('.leaflet-routing-container').show();
-                  $('#route_button').html('Hide Route');
+                  $('#route_button').html('Hide');
                 }
 
               }
@@ -475,9 +475,9 @@
               } else {
                 control.spliceWaypoints(control.getWaypoints().length - 1, 1, location);
                 $('.leaflet-routing-container').show();
-                if($('#route_button').html() == "Show Route"){
+                if($('#route_button').html() == "Show"){
                   $('.leaflet-routing-container').show();
-                  $('#route_button').html('Hide Route');
+                  $('#route_button').html('Hide');
                 }
               }
               mymap.closePopup();
@@ -530,9 +530,9 @@
               } else {
                 control.spliceWaypoints(0, 1, location);
                 $('.leaflet-routing-container').show();
-                if($('#route_button').html() == "Show Route"){
+                if($('#route_button').html() == "Show"){
                   $('.leaflet-routing-container').show();
-                  $('#route_button').html('Hide Route');
+                  $('#route_button').html('Hide');
                 }
 
               }
@@ -545,9 +545,9 @@
               } else {
                 control.spliceWaypoints(control.getWaypoints().length - 1, 1, location);
                 $('.leaflet-routing-container').show();
-                if($('#route_button').html() == "Show Route"){
+                if($('#route_button').html() == "Show"){
                   $('.leaflet-routing-container').show();
-                  $('#route_button').html('Hide Route');
+                  $('#route_button').html('Hide');
                 }
               }
               mymap.closePopup();
@@ -607,16 +607,16 @@
   <script>
     if($('.leaflet-routing-container').is(":visible")){
       console.log("setting Inner HTML");
-      $('#route_button').html('Hide Route');
+      $('#route_button').html('Hide');
     }
     $('#route_button').click(function() {
-      if($('#route_button').html() == "Show Route"){
+      if($('#route_button').html() == "Show"){
         $('.leaflet-routing-container').show();
-        $('#route_button').html('Hide Route');
+        $('#route_button').html('Hide');
       }
       else {
         $('.leaflet-routing-container').hide();
-        $('#route_button').html('Show Route');
+        $('#route_button').html('Show');
       }
     });
   </script>
