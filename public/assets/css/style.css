@@ -31,11 +31,11 @@ body{ margin:0px 0px; }
 }
 
 .c_legend {
-    line-height: 18px; !important;
+    line-height: 20px; !important;
     color: #555; !important;
 }
 .c_legend i {
-    width: 20px; !important;
+    width: 18px; !important;
     height: 18px; !important;
     float: left; !important;
     margin-right: 8px; !important;
