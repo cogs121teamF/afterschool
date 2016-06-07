@@ -86,8 +86,23 @@
   </style>
   <div class="container">
   <style>
-    #map { 
-      height: 560px; 
+    #map {
+      height: 560px;
+      padding-top:50px;
+      width: 69%;
+    }
+    .legend {
+      float:left;
+      /* position:absolute; */
+      margin: 0px 0px 50px 20px;
+      width: 27%;
+      height: 600px;
+      /* background-color: #80cbc4; */
+      /* border-style: solid; */
+    }
+
+    #chloropleth {
+      height: 560px;
       padding-top:50px;
       width: 69%;
     }
@@ -121,8 +136,21 @@
     </div>
       <div class="map">
         <h5 style="float:left;">Map</h5>
+        <div class="section">
+          <h3>School Name</h3>
+          <p>Map Type</p>
+          <div class="switch">
+              <label>
+                Cluster
+                <input type="checkbox" id="mapToggle">
+                <span class="lever"></span>
+                Heatmap
+              </label>
+            </div>
+        </div>
         <button id="route_button" type="button" style="float:right; margin-right:17px; margin-top:10px;">Show Routing</button>
         <div id="map" style="z-index:1"></div>
+        <div id="chloropleth" style="z-index:1"></div>
       </div>
     </div>
   </div>
@@ -149,7 +177,7 @@
               <div class="col s4 col1">
                 <div class="center">
                   <i class="large material-icons" style="color:white">schedule</i>
-                  <p><em>Students spend 9 hours on media every day.</em><br><br> Studies have shown that excessive media use can lead to attention problems, school difficulties, sleep and eating disorders, and obesity.</p> 
+                  <p><em>Students spend 9 hours on media every day.</em><br><br> Studies have shown that excessive media use can lead to attention problems, school difficulties, sleep and eating disorders, and obesity.</p>
                 </div>
               </div>
             </div>
@@ -169,7 +197,7 @@
               <div class="col s4 col2">
                 <div class="center">
                   <i class="large material-icons" style="color:#ffff8d">supervisor_account</i>
-                  <p><em>Develops Skills</em> <br><br>Children can grow in their self-esteem by learning new skills and interacting with their peers. For example, reading as a child has a positive correlation with the folowing: communication skills, logical thinking skills, concentration, and discipline. </p> 
+                  <p><em>Develops Skills</em> <br><br>Children can grow in their self-esteem by learning new skills and interacting with their peers. For example, reading as a child has a positive correlation with the folowing: communication skills, logical thinking skills, concentration, and discipline. </p>
                 </div>
               </div>
             </div>
@@ -218,6 +246,7 @@
   <!--  Scripts-->
   <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
   <script src="assets/js/leaflet-routing-machine.js"></script>
+  <script src="assets/js/leafletpip.min.js"></script>
   <script>
     var mymap = L.map('map').setView([32.87, -116.89], 10);
     L.mapbox.accessToken = 'pk.eyJ1IjoicGphbWFzMTgwIiwiYSI6ImNpb3AzN2szMzAwMmp1cGtxZzVxZHlnYW8ifQ.Ml7vL74HZOhLKcF2qNQ58g';
@@ -285,7 +314,7 @@
             placeMarker.bindPopup(popup);
 
             var location = null;
-            
+
             placeMarker.on('click', function(e) {
               location = e.latlng;
             });
@@ -307,12 +336,12 @@
                 control.spliceWaypoints(control.getWaypoints().length - 1, 1, location);
               }
               mymap.closePopup();
-            });  
+            });
 
             masterCluster.addLayer(placeMarker);
             libArray.push(placeMarker);
             //mymap.addLayer(libArray[i]);
-          }   
+          }
         });
         libClicked = true;
       }
@@ -340,7 +369,7 @@
             placeMarker.bindPopup(popup);
 
             var location = null;
-            
+
             placeMarker.on('click', function(e) {
               location = e.latlng;
             });
@@ -362,12 +391,12 @@
                 control.spliceWaypoints(control.getWaypoints().length - 1, 1, location);
               }
               mymap.closePopup();
-            });   
+            });
 
             masterCluster.addLayer(placeMarker);
             parkArray.push(placeMarker);
             //mymap.addLayer(parkArray[i]);
-          }   
+          }
         });
         parkClicked = true;
       }
@@ -396,7 +425,7 @@
             placeMarker.bindPopup(popup);
 
             var location = null;
-            
+
             placeMarker.on('click', function(e) {
               location = e.latlng;
             });
@@ -418,8 +447,8 @@
                 control.spliceWaypoints(control.getWaypoints().length - 1, 1, location);
               }
               mymap.closePopup();
-            });  
- 
+            });
+
             masterCluster.addLayer(placeMarker);
             recArray.push(placeMarker);
             //mymap.addLayer(recArray[i]);
@@ -455,7 +484,7 @@
             marker.bindPopup(popup);
 
             var location = null;
-            
+
             marker.on('click', function(e) {
               location = e.latlng;
             });
@@ -479,7 +508,7 @@
                 $('.leaflet-routing-container').show();
               }
               mymap.closePopup();
-            });  
+            });
 
             masterCluster.addLayer(marker);
             schoolArray.push(marker);
@@ -487,7 +516,7 @@
           mymap.addLayer(masterCluster);
 
       }
-    });  
+    });
 
     var eventData = {};
     var eventString ="<li class=\"collection-header\"><h4>Events</h4></li>";
@@ -517,9 +546,9 @@
 
   </script>
   <script>
-  
+
     var x = $('.leaflet-routing-add-waypoint').hide();
-    
+
     if(control.getWaypoints().length == 2) {
       $('.leaflet-routing-container').hide();
     }
@@ -544,7 +573,7 @@
       }
       else {
         $('.leaflet-routing-container').hide();
-        $('#route_button').html('Show Routing');        
+        $('#route_button').html('Show Routing');
       }
     });
   </script>
@@ -554,8 +583,23 @@
 
   <!-- Compiled and minified JavaScript -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/js/materialize.min.js"></script>
-  <script stc="assets/js/easing.js"></script>
+  <script src="assets/js/easing.js"></script>
+  <script>
+    function toggleDiv(){
+      if($(this).is(':checked')) {
+        $("#map").hide();
+        $("#chloropleth").show();
+      } else {
+        $("#map").show();
+        $("#chloropleth").hide();
+      }
+    }
 
+    $(function(){
+      $("#mapToggle").change(toggleDiv).trigger('change');
+    });
+  </script>
+  <script src="assets/js/chloropleth.js"></script>
   <script>
     $('a.page-scroll').bind('click', function(event) {
         var $anchor = $(this);
