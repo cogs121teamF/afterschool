@@ -53,6 +53,7 @@
          </ul>
           <ul class="right" style="padding-right:10px">
             <li><a class="page-scroll" href="#statisticsSection">Why it Matters</a></li>
+            <li><a class="page-scroll" href="#aboutSection">About</a></li>
           </ul>
         </div>
       </nav>
@@ -206,6 +207,7 @@
       </div>
 
   <footer class="page-footer teal lighten-1" style="margin-top:0px; padding-bottom:15px">
+    <div id="aboutSection">
     <div class="container">
       <div class="row" style="padding-bottom:15px">
           <h4 style="text-align:center;color:#ffd54f ">About Afterschool</h4>
@@ -238,6 +240,7 @@
       Made by <a class="orange-text text-lighten-3" href="https://www.google.com/search?site=&tbm=isch&source=hp&biw=1440&bih=757&q=corgi&oq=corgi&gs_l=img.3..0l10.3253.4547.0.4752.5.5.0.0.0.0.134.378.0j3.3.0....0...1ac.1.64.img..2.3.374.4hlSECLECAU">Team "F" for Friends</a>
       </div>
     </div>
+  </div>
   </footer>
   <div>
 
@@ -633,6 +636,8 @@
         $("#recBox").prop('disabled', true);
         $("#libBox").prop('disabled', true);
         $("#parkBox").prop('disabled', true);
+        $("#schoolName").prop('disabled',true);
+        $("#searchButton").prop('disabled',true);
       } else {
         $("#map").show();
         $("#route_button").show();
@@ -640,6 +645,8 @@
         $("#recBox").prop('disabled', false);
         $("#libBox").prop('disabled', false);
         $("#parkBox").prop('disabled', false);
+        $("#schoolName").prop('disabled',false);
+        $("#searchButton").prop('disabled',false);
       }
     }
 
