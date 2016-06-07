@@ -323,6 +323,12 @@
                 control.spliceWaypoints(0, 0, location);
               } else {
                 control.spliceWaypoints(0, 1, location);
+                $('.leaflet-routing-container').show();
+                if($('#route_button').html() == "Show Route"){
+                  $('.leaflet-routing-container').show();
+                  $('#route_button').html('Hide Route');
+                }
+
               }
               mymap.closePopup();
             });
@@ -332,6 +338,11 @@
                 control.spliceWaypoints(control.getWaypoints().length - 1, 0, location);
               } else {
                 control.spliceWaypoints(control.getWaypoints().length - 1, 1, location);
+                $('.leaflet-routing-container').show();
+                if($('#route_button').html() == "Show Route"){
+                  $('.leaflet-routing-container').show();
+                  $('#route_button').html('Hide Route');
+                }
               }
               mymap.closePopup();
             });
@@ -378,6 +389,12 @@
                 control.spliceWaypoints(0, 0, location);
               } else {
                 control.spliceWaypoints(0, 1, location);
+                $('.leaflet-routing-container').show();
+                if($('#route_button').html() == "Show Route"){
+                  $('.leaflet-routing-container').show();
+                  $('#route_button').html('Hide Route');
+                }
+
               }
               mymap.closePopup();
             });
@@ -387,6 +404,11 @@
                 control.spliceWaypoints(control.getWaypoints().length - 1, 0, location);
               } else {
                 control.spliceWaypoints(control.getWaypoints().length - 1, 1, location);
+                $('.leaflet-routing-container').show();
+                if($('#route_button').html() == "Show Route"){
+                  $('.leaflet-routing-container').show();
+                  $('#route_button').html('Hide Route');
+                }
               }
               mymap.closePopup();
             });
@@ -434,6 +456,12 @@
                 control.spliceWaypoints(0, 0, location);
               } else {
                 control.spliceWaypoints(0, 1, location);
+                $('.leaflet-routing-container').show();
+                if($('#route_button').html() == "Show Route"){
+                  $('.leaflet-routing-container').show();
+                  $('#route_button').html('Hide Route');
+                }
+
               }
               mymap.closePopup();
             });
@@ -443,6 +471,11 @@
                 control.spliceWaypoints(control.getWaypoints().length - 1, 0, location);
               } else {
                 control.spliceWaypoints(control.getWaypoints().length - 1, 1, location);
+                $('.leaflet-routing-container').show();
+                if($('#route_button').html() == "Show Route"){
+                  $('.leaflet-routing-container').show();
+                  $('#route_button').html('Hide Route');
+                }
               }
               mymap.closePopup();
             });
@@ -494,6 +527,11 @@
               } else {
                 control.spliceWaypoints(0, 1, location);
                 $('.leaflet-routing-container').show();
+                if($('#route_button').html() == "Show Route"){
+                  $('.leaflet-routing-container').show();
+                  $('#route_button').html('Hide Route');
+                }
+
               }
               mymap.closePopup();
             });
@@ -504,6 +542,10 @@
               } else {
                 control.spliceWaypoints(control.getWaypoints().length - 1, 1, location);
                 $('.leaflet-routing-container').show();
+                if($('#route_button').html() == "Show Route"){
+                  $('.leaflet-routing-container').show();
+                  $('#route_button').html('Hide Route');
+                }
               }
               mymap.closePopup();
             });
@@ -603,6 +645,7 @@
 
     $(function(){
       $("#mapToggle").change(toggleDiv).trigger('change');
+
     });
   </script>
   <script src="assets/js/chloropleth.js"></script>

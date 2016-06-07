@@ -211,6 +211,7 @@ var map = L.map('chloropleth', {
 	touchZoom: true
 }).setView([33, -116.8], 9);
 
+map.scrollWheelZoom.disable();
 
 // Zoom Controlz //
 function allowZoom() {
