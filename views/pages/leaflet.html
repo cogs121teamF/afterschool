@@ -121,6 +121,7 @@
     </div>
       <div class="map">
         <h5 style="float:left;">Map</h5>
+        <button id="route_button" type="button" style="float:right; margin-right:17px; margin-top:10px;">Show Routing</button>
         <div id="map" style="z-index:1"></div>
       </div>
     </div>
@@ -528,8 +529,24 @@
         $('.leaflet-routing-geocoders').hide();
       }
     });
-    
 
+  </script>
+
+  <script>
+    if($('.leaflet-routing-container').is(":visible")){
+      console.log("setting Inner HTML");
+      $('#route_button').html('Hide Routing');
+    }
+    $('#route_button').click(function() {
+      if($('#route_button').html() == "Show Routing"){
+        $('.leaflet-routing-container').show();
+        $('#route_button').html('Hide Routing');
+      }
+      else {
+        $('.leaflet-routing-container').hide();
+        $('#route_button').html('Show Routing');        
+      }
+    });
   </script>
 
   <!-- <script src="/public/assets/js/materialize.js"></script> -->
