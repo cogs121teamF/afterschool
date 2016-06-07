@@ -5777,11 +5777,11 @@ form p:last-child {
 }
 
 .switch label input[type=checkbox]:checked+.lever {
-    background-color: #84c7c1
+    background-color: #F8D54F;
 }
 
 .switch label input[type=checkbox]:checked+.lever:after {
-    background-color: #26a69a;
+    background-color: #F8D54F;
     left: 24px
 }
 
